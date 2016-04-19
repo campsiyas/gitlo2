@@ -3,25 +3,39 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package clases;
+import java.awt.Desktop;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author juancho
  */
 public class VISUAL extends javax.swing.JFrame {
-
-    /**
-     * Creates new form VISUAL
-     */
+    public String his,his2,his3,his4,his5,calle="";
+    String hist[];
+    int c;
+    Date d,dv;
+    DefaultTableModel modelo= new DefaultTableModel();
+    String h;
     public VISUAL() {
         initComponents();
         Buscarr.add(nombrer);
@@ -39,16 +53,17 @@ public class VISUAL extends javax.swing.JFrame {
     private void initComponents() {
 
         Buscarr = new javax.swing.ButtonGroup();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        nombrelbl = new javax.swing.JLabel();
+        tellb = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        FECHA = new javax.swing.JLabel();
+        equipolbl = new javax.swing.JLabel();
+        fechalbl = new javax.swing.JLabel();
         ordenlbl = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        callelb = new javax.swing.JLabel();
+        colonialb = new javax.swing.JLabel();
+        cruzalb = new javax.swing.JLabel();
+        municipiolb = new javax.swing.JLabel();
         ordentx = new javax.swing.JTextField();
         nombretx = new javax.swing.JTextField();
         equipotx = new javax.swing.JTextField();
@@ -57,11 +72,6 @@ public class VISUAL extends javax.swing.JFrame {
         coloniatx = new javax.swing.JTextField();
         municipiotx = new javax.swing.JTextField();
         teltx = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        trabajotx = new javax.swing.JTextPane();
-        jLabel11 = new javax.swing.JLabel();
         buscarbt = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
@@ -69,14 +79,68 @@ public class VISUAL extends javax.swing.JFrame {
         borrarbt = new javax.swing.JButton();
         editarbt = new javax.swing.JButton();
         nuevobt = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        atendidotx = new javax.swing.JTextField();
         cancelarbt = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         nombrer = new javax.swing.JRadioButton();
         caller = new javax.swing.JRadioButton();
         borrarbtn = new javax.swing.JButton();
-        fechatx = new org.jdesktop.swingx.JXDatePicker();
+        apellidoplbl = new javax.swing.JLabel();
+        apellidomlbl = new javax.swing.JLabel();
+        apellidoptx = new javax.swing.JTextField();
+        apellidomtx = new javax.swing.JTextField();
+        fechatx = new com.lavantech.gui.comp.DateTimePicker();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        fechavtx = new com.lavantech.gui.comp.DateTimePicker();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        tipotx = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        nombrevtx = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        trabajotx = new javax.swing.JTextPane();
+        jLabel22 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        atendidotx = new javax.swing.JTextField();
+        fechavmtx = new javax.swing.JTextField();
+        Visita = new javax.swing.JLabel();
+        hisbt = new javax.swing.JButton();
+        impbt = new javax.swing.JButton();
+        fechamtx = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        fechav2 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        nombrelb = new javax.swing.JLabel();
+        nombrev2 = new javax.swing.JTextField();
+        ultimolb = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ultimov2 = new javax.swing.JTextArea();
+        atendiolb = new javax.swing.JLabel();
+        atendiov2 = new javax.swing.JTextField();
+        tipolb = new javax.swing.JLabel();
+        fechadv2 = new com.lavantech.gui.comp.DateTimePicker();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbproductos = new javax.swing.JTable();
+        hislb = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tipov2 = new javax.swing.JTextArea();
+        tel3 = new javax.swing.JTextField();
+        tel2 = new javax.swing.JTextField();
+        guardarbt = new javax.swing.JButton();
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 0));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 894));
@@ -85,60 +149,49 @@ public class VISUAL extends javax.swing.JFrame {
                 editar(evt);
             }
         });
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel1.setText("Nombre:");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(50, 187, 75, 22);
+        nombrelbl.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        nombrelbl.setText("Nombre(s):");
+        getContentPane().add(nombrelbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(695, 134, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel2.setText("Tel:");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(668, 195, 32, 22);
+        tellb.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        tellb.setText("Tel:");
+        getContentPane().add(tellb, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 205, -1, -1));
 
         jLabel3.setText("jLabel1");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(443, 121, 45, 0);
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(443, 82, -1, 0));
 
-        jLabel4.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel4.setText("Equipo:");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(730, 130, 65, 22);
+        equipolbl.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        equipolbl.setText("Equipo:");
+        getContentPane().add(equipolbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 96, -1, -1));
 
-        FECHA.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        FECHA.setText("Fecha:");
-        getContentPane().add(FECHA);
-        FECHA.setBounds(340, 130, 56, 22);
+        fechalbl.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        fechalbl.setText("Fecha y Hora:");
+        getContentPane().add(fechalbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(297, 94, -1, -1));
 
         ordenlbl.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         ordenlbl.setText("Orden de visita:");
-        getContentPane().add(ordenlbl);
-        ordenlbl.setBounds(54, 132, 137, 22);
+        getContentPane().add(ordenlbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 94, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel7.setText("Calle y nº:");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(54, 257, 88, 22);
+        callelb.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        callelb.setText("Calle y nº:");
+        getContentPane().add(callelb, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 172, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel8.setText("Colonia:");
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(54, 313, 71, 22);
+        colonialb.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        colonialb.setText("Colonia:");
+        getContentPane().add(colonialb, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 205, -1, -1));
 
-        jLabel9.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel9.setText("Cruza con:");
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(551, 252, 93, 22);
+        cruzalb.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        cruzalb.setText("Cruza con:");
+        getContentPane().add(cruzalb, new org.netbeans.lib.awtextra.AbsoluteConstraints(566, 172, -1, -1));
 
-        jLabel10.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel10.setText("Municipio");
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(621, 313, 84, 22);
+        municipiolb.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        municipiolb.setText("Municipio:");
+        getContentPane().add(municipiolb, new org.netbeans.lib.awtextra.AbsoluteConstraints(442, 205, -1, -1));
 
         ordentx.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        getContentPane().add(ordentx);
-        ordentx.setBounds(203, 127, 130, 32);
+        getContentPane().add(ordentx, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 89, 130, -1));
 
         nombretx.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         nombretx.addActionListener(new java.awt.event.ActionListener() {
@@ -146,12 +199,10 @@ public class VISUAL extends javax.swing.JFrame {
                 nombretxActionPerformed(evt);
             }
         });
-        getContentPane().add(nombretx);
-        nombretx.setBounds(130, 187, 530, 32);
+        getContentPane().add(nombretx, new org.netbeans.lib.awtextra.AbsoluteConstraints(789, 129, 350, -1));
 
         equipotx.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        getContentPane().add(equipotx);
-        equipotx.setBounds(800, 130, 103, 32);
+        getContentPane().add(equipotx, new org.netbeans.lib.awtextra.AbsoluteConstraints(671, 91, 450, -1));
 
         calletx.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         calletx.addActionListener(new java.awt.event.ActionListener() {
@@ -159,63 +210,19 @@ public class VISUAL extends javax.swing.JFrame {
                 calletxActionPerformed(evt);
             }
         });
-        getContentPane().add(calletx);
-        calletx.setBounds(154, 252, 362, 32);
+        getContentPane().add(calletx, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 167, 362, -1));
 
         cruzatx.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        getContentPane().add(cruzatx);
-        cruzatx.setBounds(656, 248, 186, 32);
+        getContentPane().add(cruzatx, new org.netbeans.lib.awtextra.AbsoluteConstraints(688, 167, 186, -1));
 
         coloniatx.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        getContentPane().add(coloniatx);
-        coloniatx.setBounds(131, 308, 293, 32);
+        getContentPane().add(coloniatx, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 199, 293, -1));
 
         municipiotx.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        getContentPane().add(municipiotx);
-        municipiotx.setBounds(711, 308, 160, 32);
+        getContentPane().add(municipiotx, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 199, 160, -1));
 
         teltx.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        getContentPane().add(teltx);
-        teltx.setBounds(706, 190, 160, 32);
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel12.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel12.setText("Trabajo realizado:");
-
-        trabajotx.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jScrollPane1.setViewportView(trabajotx);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 921, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel12))
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(42, 504, 947, 350);
-
-        jLabel11.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
-        jLabel11.setText("Historial:");
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(40, 470, 72, 20);
+        getContentPane().add(teltx, new org.netbeans.lib.awtextra.AbsoluteConstraints(772, 199, 160, -1));
 
         buscarbt.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         buscarbt.setText("Buscar");
@@ -224,8 +231,7 @@ public class VISUAL extends javax.swing.JFrame {
                 buscarbtActionPerformed(evt);
             }
         });
-        getContentPane().add(buscarbt);
-        buscarbt.setBounds(40, 350, 100, 30);
+        getContentPane().add(buscarbt, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 592, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 204));
 
@@ -238,27 +244,25 @@ public class VISUAL extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addComponent(jLabel13)
-                .addContainerGap(171, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(384, 384, 384))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addComponent(jLabel13)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5))
         );
 
-        getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 0, 1007, 115);
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1140, 76));
 
         borrarbt.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         borrarbt.setText("Eliminar");
@@ -267,8 +271,7 @@ public class VISUAL extends javax.swing.JFrame {
                 borrarbtActionPerformed(evt);
             }
         });
-        getContentPane().add(borrarbt);
-        borrarbt.setBounds(140, 390, 114, 30);
+        getContentPane().add(borrarbt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 630, -1, -1));
 
         editarbt.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         editarbt.setText("Editar");
@@ -277,8 +280,7 @@ public class VISUAL extends javax.swing.JFrame {
                 editarbtActionPerformed(evt);
             }
         });
-        getContentPane().add(editarbt);
-        editarbt.setBounds(240, 350, 94, 30);
+        getContentPane().add(editarbt, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 592, -1, -1));
 
         nuevobt.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         nuevobt.setText("Nuevo");
@@ -287,17 +289,7 @@ public class VISUAL extends javax.swing.JFrame {
                 nuevobtActionPerformed(evt);
             }
         });
-        getContentPane().add(nuevobt);
-        nuevobt.setBounds(340, 350, 98, 30);
-
-        jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel6.setText("Atendido por:");
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(580, 370, 119, 22);
-
-        atendidotx.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        getContentPane().add(atendidotx);
-        atendidotx.setBounds(700, 370, 150, 32);
+        getContentPane().add(nuevobt, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 592, -1, -1));
 
         cancelarbt.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         cancelarbt.setText("Cancelar");
@@ -306,26 +298,24 @@ public class VISUAL extends javax.swing.JFrame {
                 cancelarbtActionPerformed(evt);
             }
         });
-        getContentPane().add(cancelarbt);
-        cancelarbt.setBounds(440, 350, 118, 30);
+        getContentPane().add(cancelarbt, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 592, -1, -1));
 
-        jButton1.setText("prueba");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        nombrer.setText("Apellido");
+        nombrer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                nombrerActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(890, 250, 87, 29);
-
-        nombrer.setText("Nombre");
-        getContentPane().add(nombrer);
-        nombrer.setBounds(10, 390, 82, 23);
+        getContentPane().add(nombrer, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 632, -1, -1));
 
         caller.setText("Calle");
         caller.setAutoscrolls(true);
-        getContentPane().add(caller);
-        caller.setBounds(10, 410, 63, 23);
+        caller.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                callerActionPerformed(evt);
+            }
+        });
+        getContentPane().add(caller, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 652, -1, -1));
 
         borrarbtn.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         borrarbtn.setText("Borrar");
@@ -334,10 +324,250 @@ public class VISUAL extends javax.swing.JFrame {
                 borrarbtnActionPerformed(evt);
             }
         });
-        getContentPane().add(borrarbtn);
-        borrarbtn.setBounds(140, 350, 96, 30);
-        getContentPane().add(fechatx);
-        fechatx.setBounds(405, 130, 280, 26);
+        getContentPane().add(borrarbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 592, -1, -1));
+
+        apellidoplbl.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        apellidoplbl.setText("Apellido paterno:");
+        getContentPane().add(apellidoplbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 134, -1, -1));
+
+        apellidomlbl.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        apellidomlbl.setText("Apellido materno:");
+        getContentPane().add(apellidomlbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(337, 134, -1, -1));
+
+        apellidoptx.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        getContentPane().add(apellidoptx, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 129, 170, -1));
+
+        apellidomtx.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        getContentPane().add(apellidomtx, new org.netbeans.lib.awtextra.AbsoluteConstraints(504, 129, 173, -1));
+        getContentPane().add(fechatx, new org.netbeans.lib.awtextra.AbsoluteConstraints(427, 93, -1, -1));
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel3.setLayout(null);
+
+        jLabel17.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel17.setText("Fecha y Hora:");
+        jPanel3.add(jLabel17);
+        jLabel17.setBounds(7, 7, 118, 22);
+        jPanel3.add(fechavtx);
+        fechavtx.setBounds(137, 7, 152, 28);
+
+        jLabel18.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel18.setText("Atendio");
+        jPanel3.add(jLabel18);
+        jLabel18.setBounds(307, 12, 67, 22);
+
+        jLabel19.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel19.setText("Tipo de falla");
+        jPanel3.add(jLabel19);
+        jLabel19.setBounds(596, 12, 108, 22);
+
+        tipotx.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jPanel3.add(tipotx);
+        tipotx.setBounds(716, 7, 204, 32);
+
+        jLabel20.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel20.setText("Cliente satisfecho:");
+        jPanel3.add(jLabel20);
+        jLabel20.setBounds(7, 45, 160, 22);
+
+        jLabel21.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel21.setText("Nombre");
+        jPanel3.add(jLabel21);
+        jLabel21.setBounds(7, 82, 69, 22);
+
+        nombrevtx.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jPanel3.add(nombrevtx);
+        nombrevtx.setBounds(82, 77, 228, 32);
+
+        trabajotx.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jScrollPane2.setViewportView(trabajotx);
+
+        jPanel3.add(jScrollPane2);
+        jScrollPane2.setBounds(19, 143, 921, 287);
+
+        jLabel22.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel22.setText("Ultimo realizado");
+        jPanel3.add(jLabel22);
+        jLabel22.setBounds(13, 115, 142, 22);
+
+        jButton3.setText("Imprimir");
+        jPanel3.add(jButton3);
+        jButton3.setBounds(7, 436, 98, 29);
+
+        atendidotx.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jPanel3.add(atendidotx);
+        atendidotx.setBounds(380, 7, 150, 32);
+
+        fechavmtx.setText("jTextField1");
+        fechavmtx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fechavmtxActionPerformed(evt);
+            }
+        });
+        jPanel3.add(fechavmtx);
+        fechavmtx.setBounds(140, 10, 150, 26);
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 265, 0, 0));
+
+        Visita.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        Visita.setText("Visita:");
+        getContentPane().add(Visita, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 237, -1, -1));
+
+        hisbt.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        hisbt.setText("Historial completo");
+        hisbt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hisbtActionPerformed(evt);
+            }
+        });
+        getContentPane().add(hisbt, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 630, -1, -1));
+
+        impbt.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        impbt.setText("Imprimir");
+        impbt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                impbtActionPerformed(evt);
+            }
+        });
+        getContentPane().add(impbt, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 630, -1, -1));
+        getContentPane().add(fechamtx, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 96, 150, -1));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel6.setText("Fecha y hora:");
+
+        jLabel11.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel11.setText("Cliente satisfecho:");
+
+        nombrelb.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        nombrelb.setText("Nombre:");
+
+        nombrev2.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+
+        ultimolb.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        ultimolb.setText("Ultimo realizado:");
+
+        ultimov2.setColumns(20);
+        ultimov2.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        ultimov2.setRows(5);
+        jScrollPane1.setViewportView(ultimov2);
+
+        atendiolb.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        atendiolb.setText("Atendio:");
+
+        atendiov2.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+
+        tipolb.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        tipolb.setText("Tipo de falla:");
+
+        tbproductos.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        tbproductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "trabajo", "fecha"
+            }
+        ));
+        jScrollPane3.setViewportView(tbproductos);
+
+        hislb.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        hislb.setText("Historial completo:");
+
+        tipov2.setColumns(20);
+        tipov2.setRows(5);
+        jScrollPane4.setViewportView(tipov2);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ultimolb)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(hislb)
+                                .addGap(141, 141, 141)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(nombrelb)
+                                .addGap(1, 1, 1)
+                                .addComponent(nombrev2))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(12, 12, 12)
+                                .addComponent(fechadv2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(fechav2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(atendiolb)
+                                .addGap(22, 22, 22)))
+                        .addGap(11, 11, 11)
+                        .addComponent(atendiov2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(tipolb)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel6)
+                                .addComponent(fechav2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(atendiolb)
+                                .addComponent(atendiov2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tipolb))
+                            .addComponent(fechadv2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(nombrelb)
+                            .addComponent(nombrev2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(ultimolb)
+                            .addComponent(hislb)))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 271, 1110, -1));
+
+        tel3.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        getContentPane().add(tel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 200, 150, -1));
+
+        tel2.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        getContentPane().add(tel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 230, 160, -1));
+
+        guardarbt.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        guardarbt.setText("Guardar");
+        guardarbt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarbtActionPerformed(evt);
+            }
+        });
+        getContentPane().add(guardarbt, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 630, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -347,13 +577,23 @@ public class VISUAL extends javax.swing.JFrame {
     }//GEN-LAST:event_nombretxActionPerformed
 
     private void buscarbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarbtActionPerformed
-        
+   
+//    JOptionPane.showMessageDialog(this, "falta llenar campos");
+    
         //base de datos
             
 
-            
-        
+        guardarbt.setVisible(true);
+        impbt.setVisible(true);
+        hisbt.setVisible(true);
         buscar();
+//        historialt();
+        
+        fechatx.show(false);
+        fechamtx.show(true);
+        fechavmtx.show(true);
+        fechav2.show(true);
+        fechadv2.show(false);
         if(ordentx.getText().length()==0){
             JOptionPane.showMessageDialog(this, "no se encontro resultados");
         }
@@ -369,29 +609,44 @@ public class VISUAL extends javax.swing.JFrame {
         PreparedStatement pst = cn.prepareStatement(sql);
         pst.setString(1, calletx.getText());
         pst.execute();
-        exito();
-        borrar();
+//        exito();
+        
         }catch (Exception e) {
         System.out.print(e.getMessage());
 }
-        
+       eliminar(); borrar();
     }else{
              
          }
     }//GEN-LAST:event_borrarbtActionPerformed
 
     private void editarbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarbtActionPerformed
-       String e =editarbt.getText();
+        
+        hisbt.hide();
+        impbt.hide();
+        if((equipotx.getText().length()==0)){JOptionPane.showMessageDialog(this, "tiene que hacer una busqueda");}
+       else{
+           fechamtx.show(false);
+            fechav2.show(false);
+            fechatx.show(true);
+            fechadv2.show(true);
+            
+        String e =editarbt.getText();
         if (e == "Editar")
         {
         if(JOptionPane.showOptionDialog(this, "¿Esta seguro de editar la informacion?", "Esta seguro", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{" SI "," NO "},"NO")==0)
 {
 //        JOptionPane.showMessageDialog(this, "La respuesta fue - SI");
+    nombrev2.setText("");
+    atendiov2.setText("");
+    tipov2.setText("");
     editar(true);
     esconderbta();
     borrarbtn.hide();
     editarbt.setText("Actualizar");
     cancelarbt.show();
+    ultimov2.setText("");
+    
 }
     
 
@@ -402,44 +657,53 @@ else
         }
         if(e=="Actualizar"){
         //base de datos
-            //update
-            editarbt.setText("Editar");
-            mostrarbta();
-            borrarbtn.show();
-            editar(false);
-            
-             String sql = "UPDATE `cerocontaminacion` SET atendido='"+atendidotx.getText()+"',calle='"+calletx.getText()+"',colonia='"+coloniatx.getText()+"',cruza='"+cruzatx.getText()+"',trabajo='"+trabajotx.getText()+"',equipo='"+equipotx.getText()+"',fecha='"+fechatx.getDate().toString()+"',municipio='"+municipiotx.getText()+"',nombre='"+nombretx.getText()+"',orden='"+ordentx.getText()+"',tel='"+teltx.getText()+"' WHERE orden =?";
-        try{    
-        PreparedStatement pst = cn.prepareStatement(sql);
-        pst.setString(1, ordentx.getText());
-        pst.execute();
-        exito();
-        }catch (Exception a) {
-            noexito();
-                
-        System.out.print(a.getMessage());
-    }
+            actualizar();
             
         }
-        
+       }
     }//GEN-LAST:event_editarbtActionPerformed
 
     private void editar(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_editar
         editar(false);
         cancelarbt.hide();
         caller.setSelected(true);
+        fechamtx.show(false);
+        fechavmtx.show(false);
+        fechav2.show(false);
+        ordentx.enable(false);
+//        apellidoptx.enable(false);
+        hisbt.hide();
+        impbt.hide();
+        guardarbt.hide();
+       modelo.addColumn("Historial");
+    modelo.addColumn("Fecha");
+    modelo.addColumn("Falla");
+    modelo.addColumn("Atendio");
+    modelo.addColumn("Nombre");
+    tbproductos.setModel(modelo);
         
+       
         
     }//GEN-LAST:event_editar
 
     private void nuevobtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevobtActionPerformed
        String n =nuevobt.getText();
+       hisbt.hide();
+        impbt.hide();
         if (n == "Nuevo")
         {
             nuevobt.setText("Agregar");
+            apellidoptx.enable(true);
             borrar();
+            sumar();
             esconderbtn();
+            fechatx.show(true);
+            fechadv2.show(true);
+        fechamtx.show(false);
+        fechavmtx.show(false);
+        fechav2.show(false);
             editar(true);
+            ordentx.enable(false);
             
         }
         
@@ -450,11 +714,14 @@ else
 //        JOptionPane.showMessageDialog(this, "La respuesta fue - SI");
 //    editar(true);
    //llenado aqui
-    if ((equipotx.getText().length()==0)||(fechatx.getDate().toString().length()==0)||(ordentx.getText().length()==0)|| (calletx.getText().length()==0)|| (teltx.getText().length()==0)|| (cruzatx.getText().length()==0)|| (coloniatx.getText().length()==0)|| (municipiotx.getText().length()==0)|| (trabajotx.getText().length()==0)|| (atendidotx.getText().length()==0)){
+    if ((equipotx.getText().length()==0)|| (calletx.getText().length()==0)|| (teltx.getText().length()==0)|| (cruzatx.getText().length()==0)|| (coloniatx.getText().length()==0)|| (municipiotx.getText().length()==0)||  (tipov2.getText().length()==0)||  (apellidomtx.getText().length()==0)||  (apellidoptx.getText().length()==0)||  (nombretx.getText().length()==0)){
     JOptionPane.showMessageDialog(this, "falta llenar campos");
     }
     else{
-         insertar();
+        buscara();
+//         insertar();
+//         sumarh();
+         historial();
           nuevobt.setText("Nuevo");
             mostrarbtn();
             editar(false);
@@ -491,32 +758,85 @@ else
         editar(false);
         nuevobt.setText("Nuevo");
         editarbt.setText("Editar");
-        
+        borrar();
+        hisbt.hide();
+        impbt.hide();
     }//GEN-LAST:event_cancelarbtActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        conectar cc= new conectar();
-Connection cn= cc.conexion();
-    
-    if(cn==null)
-    {   
-        JOptionPane.showMessageDialog(null, "No conectado");
-    }
-    else
-    {
-        JOptionPane.showMessageDialog(null, "conectado");
-        insertar();
-    }
-
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void calletxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calletxActionPerformed
         
     }//GEN-LAST:event_calletxActionPerformed
 
     private void borrarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarbtnActionPerformed
+      
         borrar();
     }//GEN-LAST:event_borrarbtnActionPerformed
+
+    private void fechavmtxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechavmtxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fechavmtxActionPerformed
+
+    private void nombrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombrerActionPerformed
+            // TODO add your handling code here:
+//        apellidoptx.enable(true);
+//        calletx.enable(false);
+    }//GEN-LAST:event_nombrerActionPerformed
+
+    private void callerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_callerActionPerformed
+        // TODO add your handling code here:
+//        apellidoptx.enable(false);
+//        calletx.enable(true);
+    }//GEN-LAST:event_callerActionPerformed
+
+    private void hisbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hisbtActionPerformed
+    hisbt.show(false);
+        String sql="";
+    sql="SELECT * FROM `visita` WHERE orden ='"+ordentx.getText()+"' ";
+    
+    String []datos = new String [5];
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next()){
+                datos[0]=rs.getString(3);
+                
+                datos[1]=rs.getString(4);
+                datos[2]=rs.getString(6);
+                datos[3]=rs.getString(5);
+                datos[4]=rs.getString(7);
+                modelo.addRow(datos);
+            }
+//            his=datos[0];
+            c=modelo.getRowCount();
+            for (int i = 0; i < modelo.getRowCount(); i++) {
+//                int o=0;
+//                System.out.println(his[i]);
+//            his = (String.valueOf(tbproductos.getValueAt(i,0)));
+//            System.out.println(his);
+//            hist[0]=his;
+//            o++;
+            tbproductos.setModel(modelo);}
+        } catch (SQLException ex) {
+            Logger.getLogger(ingresoproductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_hisbtActionPerformed
+
+    private void impbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_impbtActionPerformed
+        // TODO add your handling code here:
+        archivo();
+        try {
+            imprimir();
+        } catch (IOException ex) {
+            Logger.getLogger(VISUAL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_impbtActionPerformed
+
+    private void guardarbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarbtActionPerformed
+        // TODO add your handling code here:
+        archivo();
+    }//GEN-LAST:event_guardarbtActionPerformed
 
     public void esconderbta(){
         buscarbt.hide();
@@ -546,10 +866,12 @@ Connection cn= cc.conexion();
         cancelarbt.hide();
     }
     public void editar(Boolean accion){
+        guardarbt.enable(accion);
         ordentx.enable(accion);
         fechatx.enable(accion);
+        fechav2.enable(accion);
             equipotx.enable(accion);
-//            nombretx.enable(accion);
+            nombretx.enable(accion);
             teltx.enable(accion);
 //            calletx.enable(accion);
             cruzatx.enable(accion);
@@ -557,12 +879,78 @@ Connection cn= cc.conexion();
             municipiotx.enable(accion);
             trabajotx.enable(accion);
             atendidotx.enable(accion);
+//            apellidoptx.enable(accion);
+            apellidomtx.enable(accion);
+            tipotx.enable(accion);
+            nombrevtx.enable(accion);
+            fechamtx.enable(accion);
+            fechadv2.enable(accion);
+            tipov2.enable(accion);
+            nombrev2.enable(accion);
+            ultimov2.enable(accion);
+            atendiov2.enable(accion);
+            tel2.enable(accion);
+            tel3.enable(accion);
             
+    
     }
+    
+    void archivo() {
+        File f;
+f = new File("/reportes/"+calletx.getText()+".txt");
+
+//Escritura
+try{
+FileWriter w = new FileWriter(f);
+BufferedWriter bw = new BufferedWriter(w);
+PrintWriter wr = new PrintWriter(bw);	
+wr.write("                       CEROCONTAMINACION");
+wr.write("\n");
+wr.write(ordenlbl.getText() +""+ordentx.getText()+" "+fechalbl.getText()+fechamtx.getText()+" "+equipolbl.getText()+equipotx.getText()+ "\n");
+wr.write(apellidoplbl.getText()+apellidoptx.getText()+" "+apellidomlbl.getText()+apellidomtx.getText()+" "+nombrelbl.getText()+nombretx.getText()+"\n");
+wr.write(callelb.getText()+calletx.getText()+" "+cruzalb.getText()+cruzatx.getText()+"\n");
+wr.write(colonialb.getText()+coloniatx.getText()+" "+municipiolb.getText()+municipiotx.getText()+" "+tellb.getText()+teltx.getText()+"  "+tel2.getText()+"  "+tel3.getText()+"\n");
+wr.write("Visita:");
+wr.write("\n");
+wr.write(fechalbl.getText()+fechav2.getText()+" "+atendiolb.getText()+atendiov2.getText()+" "+tipolb.getText()+tipov2.getText()+"\n");
+wr.write(apellidoplbl.getText()+apellidoptx.getText()+" "+apellidomlbl.getText()+apellidomtx.getText()+" "+nombrelbl.getText()+nombretx.getText()+"\n");
+wr.write("Cliente satisfecho:");
+wr.write("\n");
+wr.write(nombrelb.getText()+nombrev2.getText()+"\n");
+wr.write(ultimolb.getText()+"\n");
+wr.write(ultimov2.getText()+"\n");
+wr.write(ultimov2.getText()+"Historial\n");
+for (int i = 0; i < modelo.getRowCount(); i++) {
+            
+            his = (String.valueOf(tbproductos.getValueAt(i,0)));
+            his2 = (String.valueOf(tbproductos.getValueAt(i,1)));
+            his3 = (String.valueOf(tbproductos.getValueAt(i,2)));
+            his4 = (String.valueOf(tbproductos.getValueAt(i,3)));
+            his5 = (String.valueOf(tbproductos.getValueAt(i,4)));
+            System.out.println(his+his2+his3+his4+his5);
+            wr.write(his+" "+his2+" "+his3+" "+his4 +" "+his5+"\n");
+           }
+wr.close();
+bw.close();
+JOptionPane.showMessageDialog(null, "archivo guardado en reportes");
+}catch(IOException e){};
+       
+    }
+    
+    void imprimir() throws IOException{
+   
+		File fileToPrint = new File("/reportes/"+calletx.getText()+".txt");
+		Desktop.getDesktop().print(fileToPrint);
+    }
+    
     public void borrar(){
+       hisbt.hide();
+        impbt.hide();
             ordentx.setText("");
-            fechatx.setDate(null);
+//            fechatx.setDate(null);
             equipotx.setText("");
+            apellidoptx.setText("");
+            apellidomtx.setText("");
             nombretx.setText("");
             teltx.setText("");
             calletx.setText("");
@@ -571,73 +959,115 @@ Connection cn= cc.conexion();
             municipiotx.setText("");
             trabajotx.setText("");
             atendidotx.setText("");
+            tipotx.setText("");
+            nombrevtx.setText("");
+//            fechavtx.setDate(null);    
+            tipov2.setText("");
+            atendiov2.setText("");
+            nombrev2.setText("");
+            ultimov2.setText("");
+            String []d = new String [5];
+            clrtabla();
+            
+           
     }
     
+    private void clrtabla(){
+       for (int i = 0; i < modelo.getRowCount(); i++) {
+           modelo.removeRow(i);
+           i-=1;
+       }
+   }
     void insertar(){
         int orden=0;
         try {
         
-        PreparedStatement pst = cn.prepareStatement("INSERT INTO cerocontaminacion(atendido,calle,colonia,cruza,trabajo,equipo,fecha,municipio,nombre,orden,tel) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+        PreparedStatement pst = cn.prepareStatement("INSERT INTO cerocontaminacion(atendido,calle,colonia,cruza,trabajo,equipo,fecha,municipio,apellidop,apellidom,nombre,orden,tel,fechav,tipo,nombrev,tel2,tel3) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 //        PreparedStatement pst = cn.prepareStatement("INSERT INTO cerocontaminacion(atendido,calle,c) VALUES (?,?,?)");
-        pst.setString(10, ordentx.getText());
-        pst.setString(7, fechatx.getDate().toString());
+        pst.setString(12, ordentx.getText());
+        //obtener fecha
+        d = fechatx.getDate();
+        
+        //convertir a cadena
+        DateFormat dateFormat = new SimpleDateFormat("d/MM/yy H:mm");
+        String strDate = dateFormat.format(d);
+        pst.setString(7, strDate);
         pst.setString(6, equipotx.getText());
-        pst.setString(9, nombretx.getText());
-        pst.setString(11, teltx.getText());
+        pst.setString(11, nombretx.getText());
+        pst.setString(13, teltx.getText());
         pst.setString(2, calletx.getText());
         pst.setString(4, cruzatx.getText());
         pst.setString(3, coloniatx.getText());
         pst.setString(8, municipiotx.getText());
-        pst.setString(5, trabajotx.getText());
-        pst.setString(1, atendidotx.getText());
+        pst.setString(5, ultimov2.getText());
+        pst.setString(1, atendiov2.getText());
+        pst.setString(9, apellidoptx.getText());
+        pst.setString(10, apellidomtx.getText());
+        //obtener fecha
+        dv = fechadv2.getDate();
+        
+        //convertir a cadena
+        String strDate2 = dateFormat.format(dv);
+        pst.setString(14, strDate2);
+//        pst.setString(1, fechavtx.getDate().toString());
+        
+        pst.setString(15, tipov2.getText());
+        pst.setString(16, nombrev2.getText());
+        pst.setString(17, tel2.getText());
+        pst.setString(18, tel3.getText());
         
         
       
         pst.executeUpdate();
 //        mostrardatos("");
-        exito();
+//        exito();
     } catch (Exception e) {
         noexito();
         System.out.print(e.getMessage());
     }
+        
+        //visita
+//        try {
+//        
+//        PreparedStatement pst = cn.prepareStatement("INSERT INTO visita(fechav,tipo,nombrev) VALUES (?,?,?)");
+////        PreparedStatement pst = cn.prepareStatement("INSERT INTO cerocontaminacion(atendido,calle,c) VALUES (?,?,?)");
+//        dv = fechavtx.getDate();
+//        DateFormat dateFormat = new SimpleDateFormat("d/MM/yy H:mm");
+//        //convertir a cadena
+//        String strDate = dateFormat.format(dv);
+//        pst.setString(1, strDate);
+////        pst.setString(1, fechavtx.getDate().toString());
+//        
+//        pst.setString(2, tipotx.getText());
+//        pst.setString(3, nombrevtx.getText());
+//        
+//        
+//        
+//      
+//        pst.executeUpdate();
+////        mostrardatos("");
+//        exito();
+//    } catch (Exception e) {
+//        noexito();
+//        System.out.print(e.getMessage());
+//    }
+        
+        
     }
+    void sumar(){
+    String sql="",ns;
+    int n;
     
-    void buscar(){
-    String sql="";
+        
+        sql="SELECT max(orden)+1 FROM cerocontaminacion";
     
-   
-    
-//        sql="SELECT * FROM cerocontaminacion WHERE nombre='"+nombretx.getText()+"'";
-//        if(JOptionPane.showOptionDialog(this, "¿Esta seguro de agregar nueva informacion?", "Esta seguro", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{" Por nombre","Por direccion"},"NO")==0){
-//sql="SELECT * FROM cerocontaminacion WHERE nombre='"+nombretx.getText()+"'";
-//}
-
-//else{
-//    sql="SELECT * FROM cerocontaminacion WHERE calle='"+calletx.getText()+"'";
-//       JOptionPane.showMessageDialog(this, "La respuesta fue - NO");
-//}
-    if(nombrer.isSelected()){
-        sql="SELECT * FROM cerocontaminacion WHERE nombre='"+nombretx.getText()+"'";
-    }    
-    if(caller.isSelected()){
-        sql="SELECT * FROM cerocontaminacion WHERE calle='"+calletx.getText()+"'";
-    }
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while(rs.next()){
-                atendidotx.setText(rs.getString(1));
-                calletx.setText(rs.getString(2));
-                coloniatx.setText(rs.getString(3));
-                cruzatx.setText(rs.getString(4));
-                trabajotx.setText(rs.getString(5));
-                equipotx.setText(rs.getString(6));
-                fechatx.getEditor().setText(rs.getString(7));
-//                .getDate().toString()
-                municipiotx.setText(rs.getString(8));
-                nombretx.setText(rs.getString(9));
-                ordentx.setText(rs.getString(10));
-                teltx.setText(rs.getString(11));
+//                
+                ordentx.setText(rs.getString(1));
+                
                 }
 //            exito();
         } catch (SQLException ex) {
@@ -645,13 +1075,208 @@ Connection cn= cc.conexion();
             Logger.getLogger(ingresoproductos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    void eliminar(){
+    void buscar(){
+    String sql="";
+    
+    
+    if(nombrer.isSelected()){
+         
+        sql="SELECT * FROM cerocontaminacion WHERE apellidop='"+apellidoptx.getText()+"'";
+    }    
+    if(caller.isSelected()){
+        
+        sql="SELECT * FROM cerocontaminacion WHERE calle='"+calletx.getText()+"'";
+    }
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                atendiov2.setText(rs.getString(1));
+                calletx.setText(rs.getString(2));
+                coloniatx.setText(rs.getString(3));
+                cruzatx.setText(rs.getString(4));
+                ultimov2.setText(rs.getString(5));
+                equipotx.setText(rs.getString(6));
+                fechamtx.setText(rs.getString(7));
+                municipiotx.setText(rs.getString(8));
+                apellidoptx.setText(rs.getString(9));
+                apellidomtx.setText(rs.getString(10));
+                nombretx.setText(rs.getString(11));
+                ordentx.setText(rs.getString(12));
+                teltx.setText(rs.getString(13));
+                fechav2.setText(rs.getString(14));
+                tipov2.setText(rs.getString(15));
+                nombrev2.setText(rs.getString(16));
+                tel2.setText(rs.getString(17));
+                tel3.setText(rs.getString(18));
+                }
+//            exito();
+        } catch (SQLException ex) {
+            noexito() ;
+            Logger.getLogger(ingresoproductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
-        String sql = "delete from cerocontaminacion where calle = ?";
+    }
+    
+    void buscara(){
+    String sql="";
+    
+    
+    if(nombrer.isSelected()){
+         
+        sql="SELECT * FROM cerocontaminacion WHERE apellidop='"+apellidoptx.getText()+"'";
+    }    
+    if(caller.isSelected()){
+        
+        sql="SELECT * FROM cerocontaminacion WHERE calle='"+calletx.getText()+"'";
+    }
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                
+                calle =(rs.getString(2));    
+                System.out.println(calle);
+                
+                }
+            if(calle.equals(calletx.getText())){
+                   System.out.println("actualiza");
+                   actualizar();
+                   
+                }
+//            else{System.out.println("no igual");}
+//            exito();
+        } catch (SQLException ex) {
+            noexito() ;
+            Logger.getLogger(ingresoproductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(!calle.equals(calletx.getText()))
+        {
+            insertar();
+            
+        }
+    }
+    
+//    void buscarv(){
+//    String sql="";
+//    
+//    
+//    
+//        sql="SELECT * FROM visita WHERE calle='"+calletx.getText()+"'";
+//    
+//        try {
+//            Statement st = cn.createStatement();
+//            ResultSet rs = st.executeQuery(sql);
+//            while(rs.next()){
+//                fechavmtx.setText(rs.getString(1));
+//                tipotx.setText(rs.getString(2));
+//                nombrevtx.setText(rs.getString(3));
+//                
+//                }
+////            exito();
+//        } catch (SQLException ex) {
+//            noexito() ;
+//            Logger.getLogger(ingresoproductos.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//        
+//    }
+    
+    void historial(){
+     try {
+        DateFormat dateFormat = new SimpleDateFormat("d/MM/yy H:mm");
+        PreparedStatement pst = cn.prepareStatement("INSERT INTO visita(orden,id,trabajo,fecha,atendio,falla,nombre) VALUES (?,?,?,?,?,?,?)");
+//        PreparedStatement pst = cn.prepareStatement("INSERT INTO cerocontaminacion(atendido,calle,c) VALUES (?,?,?)");
+        pst.setString(1, ordentx.getText());
+        pst.setString(2, calletx.getText());
+        pst.setString(3,ultimov2.getText());
+        dv = fechadv2.getDate();
+        
+        //convertir a cadena
+        String strDate2 = dateFormat.format(dv);
+        pst.setString(4, strDate2);
+        pst.setString(5,atendiov2.getText());
+        pst.setString(6,tipov2.getText());
+        pst.setString(7,nombrev2.getText());
+        
+      
+        pst.executeUpdate();
+//        mostrardatos("");
+//        exito();
+    } catch (Exception e) {
+        noexito();
+        System.out.print(e.getMessage());
+    }
+    }
+    
+    void sumarh(){
+    String sql="";
+   
+    
+        
+        sql="SELECT max(id)+1 FROM visita";
+    
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+//              
+                h= (rs.getString(1));
+                
+                }
+//            exito();
+        } catch (SQLException ex) {
+            noexito() ;
+            Logger.getLogger(ingresoproductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    void actualizar(){
+    //update
+            editarbt.setText("Editar");
+            mostrarbta();
+            borrarbtn.show();
+            
+            editar(false);
+            //obtener fecha
+        d = fechatx.getDate();
+        
+        //convertir a cadena
+        DateFormat dateFormat = new SimpleDateFormat("d/MM/yy H:mm");
+        String strDate = dateFormat.format(d);
+        //obtener fecha
+        dv = fechadv2.getDate();
+        
+        //convertir a cadena
+        
+        String strDatev = dateFormat.format(dv);
+        System.out.println(strDatev);
+             String sql = "UPDATE `cerocontaminacion` SET atendido='"+atendiov2.getText()+"',calle='"+calletx.getText()+"',colonia='"+coloniatx.getText()+"',cruza='"+cruzatx.getText()+"',trabajo='"+ultimov2.getText()+"',equipo='"+equipotx.getText()+"',fecha='"+strDate+"',municipio='"+municipiotx.getText()+"',apellidop='"+apellidoptx.getText()+"',apellidom='"+apellidomtx.getText()+"',nombre='"+nombretx.getText()+"',orden='"+ordentx.getText()+"',tel='"+teltx.getText()+"',fechav='"+strDatev+"',tipo='"+tipov2.getText()+"',nombrev='"+nombrev2.getText()+"',tel2='"+tel2.getText()+"',tel3='"+tel3.getText()+"' WHERE calle =?";
         try{    
         PreparedStatement pst = cn.prepareStatement(sql);
         pst.setString(1, calletx.getText());
+        pst.execute();
+        exito();
+        }catch (Exception a) {
+            noexito();
+                
+        System.out.print(a.getMessage());
+    }
+//        sumarh();
+        historial();
+        hisbt.show(true);
+    impbt.show(true);
+    }
+    
+    void eliminar(){
+        
+        
+        String sql = "delete from visita where orden = ?";
+        try{    
+        PreparedStatement pst = cn.prepareStatement(sql);
+        pst.setString(1, ordentx.getText());
         pst.execute();
         exito();
         }catch (Exception e) {
@@ -670,7 +1295,7 @@ Connection cn= cc.conexion();
     
     void llenado(){
        
-    if ((equipotx.getText().length()==0)|| (calletx.getText().length()==0)|| (teltx.getText().length()==0)|| (cruzatx.getText().length()==0)|| (coloniatx.getText().length()==0)|| (municipiotx.getText().length()==0)|| (trabajotx.getText().length()==0)|| (atendidotx.getText().length()==0)){
+    if ((equipotx.getText().length()==0)|| (calletx.getText().length()==0)|| (teltx.getText().length()==0)|| (cruzatx.getText().length()==0)|| (coloniatx.getText().length()==0)|| (municipiotx.getText().length()==0)|| (ultimov2.getText().length()==0)|| (atendiov2.getText().length()==0)|| (nombrev2.getText().length()==0)|| (tipov2.getText().length()==0)){
     JOptionPane.showMessageDialog(this, "falta llenar campos");
     }
     else{
@@ -716,44 +1341,81 @@ Connection cn= cc.conexion();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup Buscarr;
-    private javax.swing.JLabel FECHA;
+    private javax.swing.JLabel Visita;
+    private javax.swing.JLabel apellidomlbl;
+    private javax.swing.JTextField apellidomtx;
+    private javax.swing.JLabel apellidoplbl;
+    private javax.swing.JTextField apellidoptx;
     private javax.swing.JTextField atendidotx;
+    private javax.swing.JLabel atendiolb;
+    private javax.swing.JTextField atendiov2;
     private javax.swing.JButton borrarbt;
     private javax.swing.JButton borrarbtn;
     private javax.swing.JButton buscarbt;
+    private javax.swing.JLabel callelb;
     private javax.swing.JRadioButton caller;
     private javax.swing.JTextField calletx;
     private javax.swing.JButton cancelarbt;
+    private javax.swing.JLabel colonialb;
     private javax.swing.JTextField coloniatx;
+    private javax.swing.JLabel cruzalb;
     private javax.swing.JTextField cruzatx;
     private javax.swing.JButton editarbt;
+    private javax.swing.JLabel equipolbl;
     private javax.swing.JTextField equipotx;
-    private org.jdesktop.swingx.JXDatePicker fechatx;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
+    private com.lavantech.gui.comp.DateTimePicker fechadv2;
+    private javax.swing.JLabel fechalbl;
+    private javax.swing.JTextField fechamtx;
+    private com.lavantech.gui.comp.DateTimePicker fechatx;
+    private javax.swing.JTextField fechav2;
+    private javax.swing.JTextField fechavmtx;
+    private com.lavantech.gui.comp.DateTimePicker fechavtx;
+    private javax.swing.JButton guardarbt;
+    private javax.swing.JButton hisbt;
+    private javax.swing.JLabel hislb;
+    private javax.swing.JButton impbt;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel municipiolb;
     private javax.swing.JTextField municipiotx;
+    private javax.swing.JLabel nombrelb;
+    private javax.swing.JLabel nombrelbl;
     private javax.swing.JRadioButton nombrer;
     private javax.swing.JTextField nombretx;
+    private javax.swing.JTextField nombrev2;
+    private javax.swing.JTextField nombrevtx;
     private javax.swing.JButton nuevobt;
     private javax.swing.JLabel ordenlbl;
     private javax.swing.JTextField ordentx;
+    private javax.swing.JTable tbproductos;
+    private javax.swing.JTextField tel2;
+    private javax.swing.JTextField tel3;
+    private javax.swing.JLabel tellb;
     private javax.swing.JTextField teltx;
+    private javax.swing.JLabel tipolb;
+    private javax.swing.JTextField tipotx;
+    private javax.swing.JTextArea tipov2;
     private javax.swing.JTextPane trabajotx;
+    private javax.swing.JLabel ultimolb;
+    private javax.swing.JTextArea ultimov2;
     // End of variables declaration//GEN-END:variables
 conectar cc= new conectar();
     Connection cn= cc.conexion();
